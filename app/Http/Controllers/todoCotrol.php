@@ -23,12 +23,28 @@ class todoCotrol extends Controller
         $NewData['name'] = $request->input('name');
         $NewData['user_id'] = Auth::id();
         $NewData->save();
-        return redirect('my-todo');
+        if ($request->input('add')) {
+            return redirect('my-todo');
+        } else{
+            return redirect('add-todo');
+        }
     }
 
     function MyTodo() {
         $MyTodo = DB::table('todos')->where('user_id', '=', Auth::id())->get();
         return view('my-todo', ['data' => $MyTodo]);
+    }
+
+    function deleteTodo($id) {
+        $id= (int)$id;
+        $getTodo = todos::findOrFail($id);
+        if ($getTodo['user_id'] != Auth::id()) {
+            return abort('404');
+        }
+        else {
+            $getTodo->delete();
+            return redirect('my-todo');
+        }
     }
 
 }

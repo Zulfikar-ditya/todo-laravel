@@ -24,8 +24,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::group(['middleware' => ['auth']], function() {
     Route::get('todo/', [todoCotrol::class, 'index']);
 
-    Route::get('add-todo/', [todoCotrol::class, 'addTodoView']);
+    Route::get('add-todo/', [todoCotrol::class, 'addTodoView'])->name('add');
     Route::post('add-todo/', [todoCotrol::class, 'addTodoFucn']);
 
-    Route::get('my-todo/', [todoCotrol::class, 'MyTodo']);
+    Route::get('my-todo/', [todoCotrol::class, 'MyTodo'])->name('list');
+
+    Route::get('delete/{id}/', [todoCotrol::class, 'deleteTodo']);
 });

@@ -38,6 +38,12 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('add') }}">Add To Do</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('list') }}">My To Do</a>
+                    </li>
                 </ul>
             </div>
         </div>
