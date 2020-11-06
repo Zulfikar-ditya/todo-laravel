@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\todoCotrol;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +20,12 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('todo/', [todoCotrol::class, 'index']);
+
+    Route::get('add-todo/', [todoCotrol::class, 'addTodoView']);
+    Route::post('add-todo/', [todoCotrol::class, 'addTodoFucn']);
+
+    Route::get('my-todo/', [todoCotrol::class, 'MyTodo']);
+});
